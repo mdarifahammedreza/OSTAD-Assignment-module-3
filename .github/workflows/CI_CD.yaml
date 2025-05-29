@@ -65,9 +65,9 @@ jobs:
       - name: Start Application
         run:
             pm2 kill || true
-            pm2 start server.js --name Node-APP
+            pm2 start src/server.js --name "node-app"
             pm2 save
-            pm2 startup
+           
 
       - name: Show success message
         run: echo "✅ Build Success......"

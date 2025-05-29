@@ -25,7 +25,7 @@ jobs:
     - name: Run test & store log
       run: |
         mkdir -p test-results
-        npm check >test-results/results.txt
+        npm check >results.txt 
 
     - name: upload test results
       uses: actions/upload-artifact@v3

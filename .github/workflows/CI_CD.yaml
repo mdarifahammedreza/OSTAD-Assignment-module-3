@@ -25,7 +25,7 @@ jobs:
     - name: Run test & store log
       run: |
         mkdir -p test-results
-        npm check > results.txt || echo "FAILED test"
+        npm run check >test-results/results.txt || echo "TEST FAILD"
 
     - name: upload test results
       uses: actions/upload-artifact@v3

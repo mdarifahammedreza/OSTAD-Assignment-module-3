@@ -1,0 +1,84 @@
+name: CI/CD Pipeline for a Node.js Application
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+
+jobs:
+  test:
+    runs-on: ostad1
+
+    steps: 
+    - name: Code checkout
+      uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+      node-version: 22
+
+    - name: dependency install 
+      run: npm install
+    
+    - name: Run test & store log
+      run: |
+        mkdir -p test-results
+        npm check >test-results/results.txt
+
+    - name: Upload test result in artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: test-results/results.txt
+
+ #deploy
+
+  # deploy:
+  #   runs-on: ostad1
+  #   needs: test
+
+  #   steps: 
+  #   - name: Code checkout
+  #     uses: actions/checkout@v3
+    
+
+
+    # services:
+    #   mongo:
+    #     image: mongo:latest
+    #     ports:
+    #       - 27017:27017
+    #     env:
+    #       MONGO_INITDB_ROOT_USERNAME: ostad
+    #       MONGO_INITDB_ROOT_PASSWORD: ostad
+
+    # steps:
+    #   - name: Checking out code
+    #     uses: actions/checkout@v3
+
+    #   - name: Set up Node.js
+    #     uses: actions/setup-node@v3
+    #     with:
+    #       node-version: '20'
+
+    #   - name: Install UI dependencies
+    #     working-directory: ./OstadUI
+    #     run: npm install
+
+    #   - name: Build UI
+    #     working-directory: ./OstadUI
+    #     run: npm run build
+      
+    #   - name: Run test case
+    #     working-directory: ./OstadUI
+    #     run: |
+    #       echo "npm run test "
+
+
+    #   - name: Build Docker container
+    #     run: docker build -f Dockerfile-UI -t ostadui .
+
+    #   - name: Show success message
+    #     run: echo "✅ Build Success.."

@@ -27,7 +27,7 @@ jobs:
         mkdir -p test-results
         npm check >test-results/results.txt
 
-    - name: Upload test result in artifact
+    - name: upload test results
       uses: actions/upload-artifact@v3
       with:
         name: test-results

@@ -46,42 +46,30 @@ jobs:
         with:
           name: test-results
 
+      - name: show test results
+        run: cat test-results.txt
 
 
-    # services:
-    #   mongo:
-    #     image: mongo:latest
-    #     ports:
-    #       - 27017:27017
-    #     env:
-    #       MONGO_INITDB_ROOT_USERNAME: ostad
-    #       MONGO_INITDB_ROOT_PASSWORD: ostad
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
-    # steps:
-    #   - name: Checking out code
-    #     uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
 
-    #   - name: Set up Node.js
-    #     uses: actions/setup-node@v3
-    #     with:
-    #       node-version: '20'
-
-    #   - name: Install UI dependencies
-    #     working-directory: ./OstadUI
-    #     run: npm install
-
-    #   - name: Build UI
-    #     working-directory: ./OstadUI
-    #     run: npm run build
-      
-    #   - name: Run test case
-    #     working-directory: ./OstadUI
-    #     run: |
-    #       echo "npm run test "
+      - name: Install PM2
+        run: npm install pm2 -g
 
 
-    #   - name: Build Docker container
-    #     run: docker build -f Dockerfile-UI -t ostadui .
+      - name: Start Application
+        run:
+            pm2 kill || true
+            pm2 start server.js --name Node-APP
 
-    #   - name: Show success message
-    #     run: echo "✅ Build Success.."
+      - name: Show success message
+        run: echo "✅ Build Success.."
+
+
+
+

@@ -47,7 +47,7 @@ jobs:
           name: test-results
 
       - name: show test results
-        run: cat test-results.txt
+        run: cat test-results/results.txt
 
 
       - name: Setup Node.js

@@ -66,8 +66,7 @@ jobs:
         run: |
             pm2 kill || true
             pm2 start src/server.js --name "node-app"
-            pm2 logs
-            pm2 save
+            
            
 
       - name: Show success message

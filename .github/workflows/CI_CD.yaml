@@ -70,7 +70,7 @@ jobs:
             pm2 startup
 
       - name: Show success message
-        run: echo "✅ Build Success.."
+        run: echo "✅ Build Success......"
 
 
 
